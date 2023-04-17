@@ -3,6 +3,7 @@
 void main() {
   search_inside_a_string();
   extracting_data_from_a_string();
+  converting_to_uppercase_or_lowercase();
 }
 
 void search_inside_a_string() {
@@ -10,16 +11,16 @@ void search_inside_a_string() {
   以及检查字符串是否以特定字符串作为开头或结尾。 */
 
   // Check whether a string contains another string
-  assert('Never add or even'.contains('add'));
+  assert('Never odd or even'.contains('odd'));
 
   // Does a string start with another string
-  assert('Never add or even'.startsWith('Never'));
+  assert('Never odd or even'.startsWith('Never'));
 
   // Does a string end with another string
-  assert('Never add or even'.endsWith('even'));
+  assert('Never odd or even'.endsWith('even'));
 
   // Find the location of a string inside a string
-  assert('Never add or even'.indexOf('odd') == 6);
+  assert('Never odd or even'.indexOf('odd') == 6);
 }
 
 void extracting_data_from_a_string() {
@@ -44,4 +45,14 @@ void extracting_data_from_a_string() {
   // Get all the UTF-16 code units in the string
   var codeUnitList = 'Never odd or even'.codeUnits.toList();
   assert(codeUnitList[0] == 78);
+}
+
+void converting_to_uppercase_or_lowercase() {
+  /*对字符串的首字母大小写进行转换 */
+
+  // Convert to uppercase
+  assert('web apps'.toUpperCase() == 'WEB APPS');
+
+  // Convert to lowercase
+  assert('WEB APPS'.toLowerCase() == 'web apps');
 }
