@@ -11,7 +11,7 @@ void number1() {
   /*
   使用 int 和 double
   的方法将字符串转换为整型或双浮点型对象：parse() */
-  assert(int.parse('42') == 42);
+  assert(int.parse('42') == 42); //assert:当条件为否，则抛出异常
   assert(int.parse('0x42') == 66);
   assert(double.parse('0.50') == 0.5);
 }
