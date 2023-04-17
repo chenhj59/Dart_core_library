@@ -46,6 +46,8 @@ void list() {
 }
 
 void sort_list() {
+  /* 对列表排序*/
+  
   var fruits = ['oranges', 'apples', 'bannans'];
   print('排序前：$fruits');
   // Sort a list
