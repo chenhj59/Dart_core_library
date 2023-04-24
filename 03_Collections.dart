@@ -43,11 +43,21 @@ void list() {
   // You can also create a List using one of the constructors
   var vegetables = List.filled(99, 'broccoli');
   assert(vegetables.every((v) => v == 'broccoli'));
+
+  // 列表是参数化类型(泛型)
+  // This list should contain only strings
+  var fruites = <String>[];
+
+  fruites.add('apples');
+  var fruit = fruites[0];
+  assert(fruit is  String);
+
+  //fruites.add(5); // 类型不匹配error: 'int' can't be assigned to 'String'
 }
 
 void sort_list() {
   /* 对列表排序*/
-  
+
   var fruits = ['oranges', 'apples', 'bannans'];
   print('排序前：$fruits');
   // Sort a list
