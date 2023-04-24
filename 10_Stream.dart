@@ -46,3 +46,11 @@ void listen_stream_data() {
       print('Done!');
     });
 }
+
+void transform_stream_date(){
+  /*Often, you need to change the format of a stream’s data before you can use it. 
+  Use the transform() method to produce a stream with a different type of data
+   */
+  var inputStream;
+  var lines = inputStream.transform(utf8.decoder)
+}
