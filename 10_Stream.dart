@@ -1,9 +1,12 @@
 // Stream:https://dart.dev/guides/libraries/library-tour#stream
+import 'dart:convert';
 import 'dart:io';
 
 void main() {
   async_for_loop();
   listen_stream_data();
+  transform_stream_date();
+  readFileAwaitFor();
 }
 
 void async_for_loop() async {
@@ -47,10 +50,30 @@ void listen_stream_data() {
     });
 }
 
-void transform_stream_date(){
+void transform_stream_date() {
   /*Often, you need to change the format of a stream’s data before you can use it. 
   Use the transform() method to produce a stream with a different type of data
    */
   var inputStream;
-  var lines = inputStream.transform(utf8.decoder)
+  var lines =
+      inputStream.transform(utf8.decoder).transform(const LineSplitter());
+}
+
+Future<void> readFileAwaitFor() async {
+  /*If you use an asynchronous for loop, then use try-catch to handle errors. 
+  Code that executes after the stream is closed goes after the asynchronous for loop
+  */
+  var config = File('config.txt');
+  Stream<List<int>> inputStream = config.openRead();
+
+  var lines =
+      inputStream.transform(utf8.decoder).transform(const LineSplitter());
+  try {
+    await for (final line in lines) {
+      print('Got ${line.length} charaters from stream');
+    }
+    print('file is now closed');
+  } catch (e) {
+    print(e);
+  }
 }
