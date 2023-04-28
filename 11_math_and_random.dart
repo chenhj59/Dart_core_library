@@ -1,7 +1,13 @@
 // math and random:https://dart.dev/guides/libraries/library-tour#dartmath---math-and-random
 import 'dart:math';
 
-void main() {}
+void main() {
+  Trigonometry();
+  max_min();
+  math_constant();
+  random_number();
+}
+
 // Trigonometry:https://dart.dev/guides/libraries/library-tour#trigonometry
 void Trigonometry() {
   //The Math library provides basic trigonometric functions
