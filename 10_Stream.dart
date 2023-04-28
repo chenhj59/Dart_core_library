@@ -76,4 +76,13 @@ Future<void> readFileAwaitFor() async {
   } catch (e) {
     print(e);
   }
+
+  inputStream.transform(utf8.decoder).transform(const LineSplitter()).listen(
+      (String line) {
+    print('Got ${line.length} characters from stream');
+  }, onDone: () {
+    print('file is now closed');
+  }, onError: (e) {
+    print(e);
+  });
 }
