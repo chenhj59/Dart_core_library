@@ -1,8 +1,11 @@
 // dart:convert - decoding and encoding JSON, UTF-8, and more:https://dart.dev/guides/libraries/library-tour#dartconvert---decoding-and-encoding-json-utf-8-and-more
-
+import 'dart:io';
 import 'dart:convert';
 
-void main() {}
+void main() {
+  Decoding_and_encoding_JSON();
+  Decoding_and_encoding_UTF8();
+}
 
 //Decoding and encoding JSON:https://dart.dev/guides/libraries/library-tour#decoding-and-encoding-json
 void Decoding_and_encoding_JSON() {
@@ -14,7 +17,7 @@ void Decoding_and_encoding_JSON() {
     [
       {"score": 40},
       {"score": 80},
-      {"score": 100, 'overtime': true, 'special_guest': null}
+      {"score": 100, "overtime": true, "special_guest": null}
     ]''';
   var scores = jsonDecode(jsonString);
   assert(scores is List);
@@ -23,11 +26,17 @@ void Decoding_and_encoding_JSON() {
   assert(firstScore is Map);
   assert(firstScore['score'] == 40);
 
+  scores = [
+  {'score': 40},
+  {'score': 80},
+  {'score': 100, 'overtime': true, 'special_guest': null}
+];
   var jsonText = jsonEncode(scores);
+  print(jsonText);
   assert(jsonText ==
-      '[{"score": 40}, {"score": 80},'
-          '{"score": 100, "overtime": true,'
-          '"special_guest": null}]');
+      '[{"score":40},{"score":80},'
+        '{"score":100,"overtime":true,'
+        '"special_guest":null}]');
 }
 
 //Decoding and encoding UTF-8 characters:https://dart.dev/guides/libraries/library-tour#decoding-and-encoding-utf-8-characters
@@ -83,7 +92,7 @@ void Decoding_and_encoding_UTF8() async {
   /*To convert a stream of UTF-8 characters into a Dart string, 
   specify utf8.decoder to the Stream transform() method
    */
-  var inputStream = null;
+  var inputStream = new File(r"/workspace/Dart_core_library/hello_world").openRead();
   var lines = utf8.decoder.bind(inputStream).transform(const LineSplitter());
   try {
     await for (final line in lines) {
@@ -92,5 +101,12 @@ void Decoding_and_encoding_UTF8() async {
     print('file is now closed');
   } catch (e) {
     print(e);
+  }
+  //Use utf8.encode() to encode a Dart string as a list of UTF8-encoded bytes
+  List<int> encoded = utf8.encode('Îñţérñåţîöñåļîžåţîờñ');
+
+  assert(encoded.length == utf8Bytes.length);
+  for (int i = 0; i < encoded.length; i++) {
+    assert(encoded[i] == utf8Bytes[i]);
   }
 }
