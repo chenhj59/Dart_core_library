@@ -4,6 +4,7 @@ import 'dart:html';
 
 void main(List<String> args) {
   Getting_data_from_server();
+  Sending_data_server();
 }
 
 void Getting_data_from_server() async {
@@ -23,6 +24,41 @@ void Getting_data_from_server() async {
     method: 'HEAD',
   );
   if (req.status == 200) {
+    print('Successful URL access');
+  }
+
+  var request = HttpRequest();
+  request
+    ..open('POST', url)
+    ..onLoadEnd.listen((e) => print('完成'))
+    ..send('encodedData');
+}
+
+void Sending_data_server() async {
+  /*Submitting data to a form handler requires you to provide name-value pairs as URI-encoded strings.
+   (Information about the URI class is in the URIs section of the Dart Library Tour.)
+   You must also set the Content-type header to application/x-www-form-urlencoded if you wish to send data to a form handler
+   */
+  String encodeMap(Map<String, String> data) => data.entries
+      .map((e) =>
+          '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+      .join('&');
+
+  const data = {'dart': 'fun', 'angular': 'productive'};
+
+  var url = 'https://example.org/api?foo=some message';
+  var request = HttpRequest();
+  request
+    ..open('POST', url)
+    ..setRequestHeader(
+      'Content-type',
+      'application/x-www-form-urlencoded',
+    )
+    ..send(encodeMap(data));
+
+  await request.onLoadEnd.first;
+
+  if (request.status == 200) {
     print('Successful URL access');
   }
 }
