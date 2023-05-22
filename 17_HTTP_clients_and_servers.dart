@@ -1,6 +1,6 @@
 // HTTP clients and servers: https://dart.dev/guides/libraries/library-tour#http-clients-and-servers
 
-import 'dart:indexed_db';
+//import 'dart:indexed_db';
 import 'dart:io';
 import 'dart:convert';
 
@@ -15,7 +15,7 @@ void main(List<String> args) async {
 void processRequest(HttpRequest request) {
   print('Got request for ${request.uri.path}');
   final response = request.response;
-  if (request.uri.path == '/dart') {
+  if (request.uri.path == '/') {
     response
       ..headers.contentType = ContentType(
         'text',
@@ -33,7 +33,7 @@ void HTTP_client() async {
   You can set headers, use HTTP methods, and read and write data. The HttpClient class does not work in browser-based apps. 
   When programming in the browser, use the dart:html HttpRequest class. Here’s an example of using HttpClient
    */
-  var url = Uri.parse('http://localhost:8888/dart');
+  var url = Uri.parse('http://localhost:8888');
   var httpClient = HttpClient();
   var request = await httpClient.getUrl(url);
   var response = await request.close();
